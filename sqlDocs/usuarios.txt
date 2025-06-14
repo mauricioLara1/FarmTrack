@@ -1,0 +1,30 @@
+aquí creamos el usuario a cargo de la base de datos, el mismo se creo y modifico antes de publicarse y no dejar ver nada extraño
+
+CREATE ROLE "adminGalpon" WITH 
+	LOGIN
+	NOSUPERUSER
+	NOCREATEDB
+	NOCREATEROLE
+	INHERIT
+	NOREPLICATION
+	NOBYPASSRLS
+	CONNECTION LIMIT 3
+	PASSWORD 'xxxxxx';
+COMMENT ON ROLE "adminGalpon" IS 'administradorGalpon';
+
+
+-- Conectarse a la base
+GRANT CONNECT ON DATABASE galpon TO "adminGalpon";
+
+-- Permisos sobre el esquema
+GRANT USAGE, CREATE ON SCHEMA public TO "adminGalpon";
+
+-- Permisos sobre todas las tablas existentes
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO "adminGalpon";
+
+-- Permisos sobre todas las secuencias existentes
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO "adminGalpon";
+
+-- Permisos por defecto sobre futuras tablas y secuencias
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO "adminGalpon";
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO "adminGalpon";

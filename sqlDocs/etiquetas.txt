@@ -1,0 +1,59 @@
+
+create table race (
+	race SERIAL PRIMARY KEY,
+	raceName varchar(25) UNIQUE NOT NULL,
+	description varchar(200) NOT NULL,
+	minWeigh DECIMAL(5,2) NOT NULL,
+	maxWeigh DECIMAL(5,2) NOT NULL,
+	del BOOLEAN DEFAULT FALSE
+);
+
+create table batchState (
+	batchState SERIAL PRIMARY KEY,
+	batchName varchar(25) UNIQUE NOT NULL,
+	del BOOLEAN DEFAULT FALSE
+);
+
+create table shedState (
+	shedState SERIAL PRIMARY KEY,
+	shedNAME varchar(25) UNIQUE NOT NULL,
+	shedDescription varchar(200) NOT NULL,
+	del BOOLEAN DEFAULT FALSE
+);
+
+create table typeWorker(
+	typeWorker SERIAL PRIMARY KEY,
+	title varchar (25),
+	description varchar (200)
+);
+
+create table vaccine(
+	vaccine serial primary key,
+	vaccineName varchar(25) unique not null,
+	vaccineDescription varchar(200) not null
+);
+
+create table typeDead(
+	typeDead serial primary key,
+	nameTypeDead varchar(25) unique not null,
+	infoTypeDead varchar(200) not null,
+	del BOOLEAN DEFAULT false
+)
+
+--pensar si agregar la opccion para filtrar comida por edad, tipo de uso, y tipo de alimento
+create table food(
+	food serial primary key,
+	nameFood varchar(25) not null unique,
+	infoFood varchar(200) not null,
+	amountLB decimal(10,2) not null,
+	del BOOLEAN DEFAULT false
+);
+
+--añadir sistema de gestión de tipo de reportes
+create table typeReport (
+	typeReport SERIAL PRIMARY KEY ,
+	typeName varchar(25) UNIQUE NOT NULL,
+	description varchar (200) NOT NULL,
+	del BOOLEAN DEFAULT FALSE
+);
+

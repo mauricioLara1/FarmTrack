@@ -1,0 +1,99 @@
+create table shed(
+	shed SERIAL PRIMARY KEY,
+	nameShed varchar (25) UNIQUE,
+	totalShare int not null,
+	usedShare int not null,
+	shedState int not null REFERENCES shedState(shedState) ON DELETE RESTRICT,
+	del BOOLEAN DEFAULT false
+);
+create table batch(
+	batch SERIAL PRIMARY KEY,
+	race int not null REFERENCES race(race) ON DELETE RESTRICT,
+	amountStart int not null,
+	amountNow int not null,
+	buyDate date not null,
+	soldDate date,
+	buyPrice DECIMAL(10,5) not null,
+	soldPrice decimal(10,5),
+	batchState int not null REFERENCES batchState(batchState) ON DELETE RESTRICT,
+	shed int not null REFERENCES shed(shed) ON DELETE RESTRICT,
+	del BOOLEAN DEFAULT false
+);
+
+
+
+create table worker(
+	worker serial primary key,
+	nameWorker varchar(25) not null,
+	birthday date not null,
+	
+	--el check revisa que tengamos un texto, un arroba con un dominio punto algo xxxx@nnnnn.iii
+	--this check is that every data have a word, a @ and point something
+	email VARCHAR(255) NOT NULL CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
+	nuip VARCHAR(10) not null unique CHECK (nuip ~ '^\d{10}$'),
+	telefono VARCHAR(10) CHECK (telefono ~ '^\d{7,10}$'),
+
+	typeWorker int not null references typeWorker(typeWorker) on delete restrict,
+	contract BOOLEAN DEFAULT TRUE,
+	cypher varchar(255),--password for has/clave para hash
+	del BOOLEAN DEFAULT false
+);
+
+create table batchVaccine(
+	batchVaccine serial primary key,
+	dateVaccine TIMESTAMP not null,
+	commentsVaccine varchar(200) not null,
+	vaccine int not null references vaccine(vaccine) on delete restrict,
+	worker int not null references worker(worker) on delete restrict,
+	batch int not null references batch(batch) on delete restrict,
+	del BOOLEAN DEFAULT false
+);
+
+create table batchFood(
+	batchFood serial primary key,
+	time TIMESTAMP not null,
+	amountUsed decimal(10,2) not null CHECK (amountUsed>1),
+	worker int not null references worker(worker) on delete restrict,
+	batch int not null references batch(batch) on delete restrict,
+	food int not null references food(food) on delete restrict,
+	del BOOLEAN DEFAULT false
+);
+
+create table batchWeightLB(
+	batchWeightLB serial primary key,
+	weightLB decimal(10,2) not null check (weightLB>1),
+	infoWeight varchar(200) not null,
+	dateWeight date not null,
+	worker int not null references worker(worker) on delete restrict,
+	batch int not null references batch(batch) on delete restrict,
+	del BOOLEAN DEFAULT false
+);
+
+create table batchDead(
+	batchDead serial primary key,
+	amountDead int not null check (amountDead > 1),
+	dateDead date not null,
+	infoDead varchar(200) not null,
+	typeDead int not null references typeDead(typeDead) on delete restrict,
+	worker int not null references worker(worker) on delete restrict,
+	batch int not null references batch(batch) on delete restrict,
+	del BOOLEAN DEFAULT false
+);
+
+create table workerComentshed(
+	workerComentshed serial primary key,
+	infoWorkerComentshed varchar(200),
+	dateworkerComentshed date,
+	worker int not null references worker(worker) on delete restrict,
+	shed int not null references shed(shed) on delete restrict,
+	del BOOLEAN DEFAULT false
+);
+
+create table workerComentbatch(
+	workerComentbatch serial primary key,
+	workerComentbatchInfo varchar(200),
+	dateworkerComentbatch date,
+	worker int not null references worker(worker) on delete restrict,
+	batch int not null references batch(batch) on delete restrict,
+	del BOOLEAN DEFAULT false
+);
