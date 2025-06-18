@@ -1,4 +1,4 @@
-
+M-s-r-c
 create table race (
 	race SERIAL PRIMARY KEY,
 	raceName varchar(25) UNIQUE NOT NULL,
@@ -7,7 +7,7 @@ create table race (
 	maxWeigh DECIMAL(5,2) NOT NULL,
 	del BOOLEAN DEFAULT FALSE
 );
-
+M-S-R-C
 create table batchState (
 	batchState SERIAL PRIMARY KEY,
 	batchName varchar(25) UNIQUE NOT NULL,
