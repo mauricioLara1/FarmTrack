@@ -1,4 +1,3 @@
-M-s-r-c
 create table race (
 	race SERIAL PRIMARY KEY,
 	raceName varchar(25) UNIQUE NOT NULL,
@@ -7,7 +6,7 @@ create table race (
 	maxWeigh DECIMAL(5,2) NOT NULL,
 	del BOOLEAN DEFAULT FALSE
 );
-M-S-R-C
+
 create table batchState (
 	batchState SERIAL PRIMARY KEY,
 	batchName varchar(25) UNIQUE NOT NULL,
@@ -21,12 +20,14 @@ create table shedState (
 	del BOOLEAN DEFAULT FALSE
 );
 
+--agregar borrado suave
 create table typeWorker(
 	typeWorker SERIAL PRIMARY KEY,
 	title varchar (25),
 	description varchar (200)
 );
 
+--agregar borrado suave
 create table vaccine(
 	vaccine serial primary key,
 	vaccineName varchar(25) unique not null,

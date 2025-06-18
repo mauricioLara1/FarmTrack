@@ -1,10 +1,12 @@
 from fastapi import FastAPI
-from app.routers import batchstate, race
+from app.routers import batchstate, race, shedState,typeworker
 
 app = FastAPI()
 
 app.include_router(batchstate.router, prefix="/batchstate", tags=["batchstate"])
 app.include_router(race.router) 
+app.include_router(shedState.router)
+app.include_router(typeworker.router)
 
 # Ruta raíz opcional
 @app.get("/")
