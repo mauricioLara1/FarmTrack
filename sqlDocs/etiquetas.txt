@@ -35,12 +35,12 @@ create table vaccine(
 );
 
 create table typeDead(
-	typeDead serial primary key,
-	nameTypeDead varchar(25) unique not null,
-	infoTypeDead varchar(200) not null,
+	typedead serial primary key,
+	Typedeadname varchar(25) unique not null,
+	typedeaddescription varchar(200) not null,
 	del BOOLEAN DEFAULT false
 )
-
+ 
 --pensar si agregar la opccion para filtrar comida por edad, tipo de uso, y tipo de alimento
 create table food(
 	food serial primary key,
