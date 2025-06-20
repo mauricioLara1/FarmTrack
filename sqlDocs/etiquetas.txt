@@ -50,7 +50,7 @@ create table food(
 	del BOOLEAN DEFAULT false
 );
 
---añadir sistema de gestión de tipo de reportes
+--recordar añadir sistema de gestión de tipo de reportes
 create table typeReport (
 	typeReport SERIAL PRIMARY KEY ,
 	typeName varchar(25) UNIQUE NOT NULL,
